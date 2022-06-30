@@ -4,9 +4,12 @@ const cheerio = require('cheerio');
 async function getFolgen() {
     return await axios.get('https://onepiece-tube.com/episoden-streams', {
             headers: {
-            Accept: "text/html",
-            "User-Agent": "axios 0.21.1"
-            }
+            Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36",
+            "Accept-Language": "de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7"
+            
+        }
+             
         }).then((response) => {
         // get Website data
         const html = response.data;
