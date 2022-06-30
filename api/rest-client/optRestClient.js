@@ -2,7 +2,12 @@ const axios = require('axios').default;
 const cheerio = require('cheerio');
 
 async function getFolgen() {
-    return await axios.get('https://onepiece-tube.com/episoden-streams').then((response) => {
+    return await axios.get('https://onepiece-tube.com/episoden-streams', {
+            headers: {
+            Accept: "text/html",
+            "User-Agent": "axios 0.21.1"
+            }
+        }).then((response) => {
         // get Website data
         const html = response.data;
         const $ = cheerio.load(html);
