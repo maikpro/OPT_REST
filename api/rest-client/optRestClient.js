@@ -74,6 +74,10 @@ async function crawl(){
     await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36");
 
     await page.goto('https://onepiece-tube.com/episoden-streams');
+    
+    await new Promise(resolve => setTimeout(resolve, 7000)); // 7 sec
+    console.log("Waited 7s");
+    
     const content = await page.content();
 
     console.log(content);
