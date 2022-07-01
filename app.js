@@ -6,6 +6,7 @@ const optRestClient = require('./api/rest-client/optRestClient');
 
 
 app.get('/episodes', async function (req, res) {
+    res.set('Access-Control-Allow-Origin', '*'); // open API
     const folgen = await optRestClient.crawl();
     res.json(folgen);
 });
