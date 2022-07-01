@@ -5,6 +5,11 @@ const optRestClient = require('./api/rest-client/optRestClient');
 
 
 
+app.get('/episodes', async function (req, res) {
+    const folgen = await optRestClient.crawl();
+    res.json(folgen);
+});
+
 app.get('/', function (req, res) {
     res.set('Access-Control-Allow-Origin', '*'); // open API
     res.send('OPT Api v1');
