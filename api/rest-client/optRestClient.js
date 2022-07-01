@@ -75,6 +75,9 @@ async function crawl(){
 
     await page.goto('https://onepiece-tube.com/episoden-streams');
     const content = await page.content();
+
+    console.log(content);
+
     const $ = cheerio.load(content);
 
     const episodes = $('.mediaitem');
