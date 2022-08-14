@@ -89,7 +89,8 @@ async function crawl(){
     await page.setJavaScriptEnabled(true);
 
     await page.goto('https://onepiece-tube.com/episoden-streams');
-    await page.waitForSelector('.mediaitem');
+    //await page.waitForSelector('.mediaitem');
+    
     
     /*await new Promise(resolve => setTimeout(resolve, 20 * 1000)); // 20 sec
     console.log("Waited 20s");*/
