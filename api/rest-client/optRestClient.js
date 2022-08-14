@@ -75,9 +75,11 @@ async function crawl(){
     const page = await browser.newPage();
 
     //user agent settings
-    const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36";
+    /*const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36";
     const userAgent = randomUseragent.getRandom();
-    const UA = userAgent || USER_AGENT;
+    const UA = userAgent || USER_AGENT;*/
+
+    
 
     //Randomize viewport size
     await page.setViewport({
@@ -89,13 +91,13 @@ async function crawl(){
         isMobile: false,
     });
 
-    await page.setUserAgent(UA);
+    //await page.setUserAgent(UA);
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36')
     await page.setJavaScriptEnabled(true);
-    await page.setDefaultNavigationTimeout(0);
     await page.goto('https://onepiece-tube.com/episoden-streams');
     
-    /*await new Promise(resolve => setTimeout(resolve, 7000)); // 7 sec
-    console.log("Waited 7s");*/
+    await new Promise(resolve => setTimeout(resolve, 10000)); // 10 sec
+    console.log("Waited 10s");
     
     const content = await page.content();
 
