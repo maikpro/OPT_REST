@@ -72,18 +72,7 @@ async function crawl(){
         ]
     });
     const page = await browser.newPage();
-
-    //Randomize viewport size
-    await page.setViewport({
-        width: 1920,
-        height: 1080,
-        deviceScaleFactor: 1,
-        hasTouch: false,
-        isLandscape: false,
-        isMobile: false,
-    });
-
-    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36')
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 5.1; rv:5.0) Gecko/20100101 Firefox/5.0')
     
     // Enable JavaScript and Cookies
     await page.setJavaScriptEnabled(true);
@@ -91,9 +80,9 @@ async function crawl(){
     await page.goto('https://onepiece-tube.com/episoden-streams');
     //await page.waitForSelector('.mediaitem');
     
-    
-    /*await new Promise(resolve => setTimeout(resolve, 20 * 1000)); // 20 sec
-    console.log("Waited 20s");*/
+
+    await new Promise(resolve => setTimeout(resolve, 60 * 1000)); // 60 sec
+    console.log("Waited 60s");
     
     // Start scraping site...
     const content = await page.content();
