@@ -1,7 +1,11 @@
 const axios = require('axios').default;
 const cheerio = require('cheerio');
 
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
+puppeteer.use(StealthPlugin());
+const randomUseragent = require('random-useragent');
+
 
 async function getFolgen() {
     return await axios.get('https://onepiece-tube.com/episoden-streams', {
@@ -60,9 +64,9 @@ async function getFolgen() {
 
 //puppeteer
 async function crawl(){
-
-    
+    // Browser settings
     const browser = await puppeteer.launch({
+        headless: true,
         'args' : [
             '--no-sandbox',
             '--disable-setuid-sandbox',
@@ -70,13 +74,28 @@ async function crawl(){
     });
     const page = await browser.newPage();
 
-    //set user agent
-    await page.setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36");
+    //user agent settings
+    const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36";
+    const userAgent = randomUseragent.getRandom();
+    const UA = userAgent || USER_AGENT;
 
+    //Randomize viewport size
+    await page.setViewport({
+        width: 1920 + Math.floor(Math.random() * 100),
+        height: 3000 + Math.floor(Math.random() * 100),
+        deviceScaleFactor: 1,
+        hasTouch: false,
+        isLandscape: false,
+        isMobile: false,
+    });
+
+    await page.setUserAgent(UA);
+    await page.setJavaScriptEnabled(true);
+    await page.setDefaultNavigationTimeout(0);
     await page.goto('https://onepiece-tube.com/episoden-streams');
     
-    await new Promise(resolve => setTimeout(resolve, 7000)); // 7 sec
-    console.log("Waited 7s");
+    /*await new Promise(resolve => setTimeout(resolve, 7000)); // 7 sec
+    console.log("Waited 7s");*/
     
     const content = await page.content();
 
