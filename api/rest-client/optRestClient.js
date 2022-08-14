@@ -4,7 +4,6 @@ const cheerio = require('cheerio');
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
-const randomUseragent = require('random-useragent');
 
 
 async function getFolgen() {
@@ -74,31 +73,28 @@ async function crawl(){
     });
     const page = await browser.newPage();
 
-    //user agent settings
-    /*const USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36";
-    const userAgent = randomUseragent.getRandom();
-    const UA = userAgent || USER_AGENT;*/
-
-    
-
     //Randomize viewport size
     await page.setViewport({
-        width: 1920 + Math.floor(Math.random() * 100),
-        height: 3000 + Math.floor(Math.random() * 100),
+        width: 1920,
+        height: 1080,
         deviceScaleFactor: 1,
         hasTouch: false,
         isLandscape: false,
         isMobile: false,
     });
 
-    //await page.setUserAgent(UA);
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36')
+    
+    // Enable JavaScript and Cookies
     await page.setJavaScriptEnabled(true);
+
     await page.goto('https://onepiece-tube.com/episoden-streams');
+    await page.waitForSelector('.mediaitem');
     
-    await new Promise(resolve => setTimeout(resolve, 10000)); // 10 sec
-    console.log("Waited 10s");
+    /*await new Promise(resolve => setTimeout(resolve, 20 * 1000)); // 20 sec
+    console.log("Waited 20s");*/
     
+    // Start scraping site...
     const content = await page.content();
 
     console.log(content);
