@@ -3,20 +3,31 @@ const app = express();
 const port = process.env.PORT || 80;
 const optRestClient = require('./api/rest-client/optRestClient');
 
+const router = express.Router();
 
+app.use("/api", router);
 
-app.get('/episodes', async function (req, res) {
+router.get('/episodes', async function (req, res) {
     res.set('Access-Control-Allow-Origin', '*'); // open API
     const folgen = await optRestClient.crawl();
     res.json(folgen);
 });
 
-app.get('/', function (req, res) {
+router.get('/test', async function (req, res) {
+    res.set('Access-Control-Allow-Origin', '*'); // open API
+    const obj = {
+        test: 'hello'
+    }
+    res.json(obj);
+});
+
+
+router.get('/', function (req, res) {
     res.set('Access-Control-Allow-Origin', '*'); // open API
     res.send('OPT Api v1');
 });
 
-app.get('/folgen', async function (req, res) {
+router.get('/folgen', async function (req, res) {
     res.set('Access-Control-Allow-Origin', '*'); // open API
     const folgen = await optRestClient.getFolgen();
     res.json(folgen);

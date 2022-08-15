@@ -81,7 +81,7 @@ async function crawl(){
     //await page.waitForSelector('.mediaitem');
     
     await page.waitForTimeout(5000);
-    await page.screenshot({ path: 'testresult.png', fullPage: true })
+    //await page.screenshot({ path: 'testresult.png', fullPage: true })
 
     // Start scraping site...
     const content = await page.content();
