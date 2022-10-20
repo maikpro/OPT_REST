@@ -17,7 +17,7 @@ async function getFolgen() {
             // Fillerfolge markieren
             const childNodes = $(this).children('td').eq(1)[0].childNodes
             if (childNodes.length === 2) {
-                const fillerMarker = childNodes[1].currentSrc;
+                const fillerMarker = childNodes[1].attribs.src;
 
                 if (fillerMarker.includes("filler.gif")) {
                     isFiller = true;
